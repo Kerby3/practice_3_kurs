@@ -8,17 +8,9 @@ const https = require('https');
 translate.engine = "deepl";
 translate.key = process.env.DEEPL_KEY;
 
-let texts = ["borsch"];
-
-// Функция для генерации случайной строки
-function genRandString(length = 32) {
-  return crypto.randomBytes(length / 2).toString('hex');
-}
-
 // Параметры запроса
-const consumerKey = 'f24e9b57a0cf4cde9663ac9fbbf5584f'; // Замените на ваш consumer key
-const consumerSecret = 'efc3fe59577240969e070a128a1d524d'; // Замените на ваш consumer secret
-
+const consumerKey = 'f24e9b57a0cf4cde9663ac9fbbf5584f';
+const consumerSecret = 'efc3fe59577240969e070a128a1d524d';
 const randomString = 'abc1';
 
 let url = "https://platform.fatsecret.com/rest/server.api";
@@ -37,31 +29,12 @@ function createBaseString(url, params) {
 
 
 //генерирует oauth_signature
-/*function generateHMACSHA1Signature(baseString, consumerSecret, accessSecret="") {
+function generateHMACSHA1Signature(baseString, consumerSecret, accessSecret="") {
   // Объединение секрета потребителя и секрета доступа с помощью '&'
   const signingKey = `${consumerSecret}&${accessSecret}`;
 
   // Создание хэша HMAC-SHA1
   const hmac = crypto.createHmac('sha1', signingKey);
-  hmac.update(baseString);
-  const hash = hmac.digest('base64');
-
-  // Кодирование хэша с использованием процентов-кодирования RFC3986
-  const encodedSignature = encodeURIComponent(hash);
-
-  return encodedSignature;
-}*/
-
-function generateHMACSHA1Signature(baseString, consumerSecret, accessSecret="") {
-  // Объединение секрета потребителя и секрета доступа с помощью '&'
-  const signingKey = `${consumerSecret}&${accessSecret}`;
-
-  // Замена "_" на "/" и "-" на "+" в signingKey
-  const normalizedKey = signingKey.replace(/_/g, '/').replace(/-/g, '+');
-
-  // Создание хэша HMAC-SHA1
-
-  const hmac = crypto.createHmac('sha1', normalizedKey, 'utf-8');
   hmac.update(baseString);
   const hash = hmac.digest('base64');
 
@@ -143,10 +116,8 @@ async function prepareDataToDB1(recipes) {
 }
 
 async function fetchDirections(url) {
-  //console.log('aлееее');
   try {
     const res = await axios.get(url);
-    // Проверяем наличие res.data и res.data.recipe
     if (!res.data || !res.data.recipe) {
       throw new Error('Не удалось получить инструкции');
     }
@@ -165,7 +136,7 @@ async function getDirections(ids) {
     let oauth_signature = generateHMACSHA1Signature(baseStr, consumerSecret);
     let fullUrl = `${url}?${convertObjectToQueryString({ ...sortedParams, "oauth_signature": oauth_signature })}`;
 
-    return fetchDirections(fullUrl); // await уже не обязателен, т.к. fetchDirections возвращает null в случае ошибки 
+    return fetchDirections(fullUrl); 
   });
   try {
     const allDirections = await Promise.all(directionPromises);
@@ -198,7 +169,7 @@ function combineData(fetchedId, directions, dataToDB1, dataToDB2) {
     const newObject = { ...item };
 
     if (idIndex !== -1) {
-      newObject.ingredients = dataToDB2[index]; // Используем index для доступа к dataToDB2
+      newObject.ingredients = dataToDB2[index];
       newObject.directions = directions[idIndex];
     }
 
@@ -208,7 +179,6 @@ function combineData(fetchedId, directions, dataToDB1, dataToDB2) {
 
 async function addRecipesToDatabase(recipes, connection) {
   try {
-    //const connection = await pool.getConnection();
     const [resultsOfIngredients] = await connection.execute('SELECT * FROM `ингредиенты`');
     const allIngredientsInBase = new Map(resultsOfIngredients.map(result => [result['название'], result['id-ингредиента']]));
     const [resultsOfRecipes] = await connection.execute('SELECT название FROM `рецепты`');
@@ -267,10 +237,9 @@ async function addRecipesToDatabase(recipes, connection) {
 
 //обработка данных
 const processData = async (req, res, pool, connection) => {
-  //const connection = await pool.getConnection();
- console.log(req.body);
+ //console.log(req.body);
  if (req.body['method'] == 'ingredients') {
-     console.log(req.body);
+     //console.log(req.body);
      let sql = `WITH RecipeIngredients AS (
     SELECT
         r.\`id-рецепта\`,
@@ -421,8 +390,3 @@ const getData = async(req,res,connection) => {
 }
 module.exports.processData = processData;
 module.exports.getData = getData;
-/*
-const consumerKey = 'f24e9b57a0cf4cde9663ac9fbbf5584f'; // Замените на ваш consumer key
-const consumerSecret = 'efc3fe59577240969e070a128a1d524d'; // Замените на ваш consumer secret
-const clientSecret = '833407602b45497ebd8a24116a03d687';
-*/

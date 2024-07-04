@@ -1,4 +1,3 @@
-/*import logo from './logo.svg';*/
 import './App.css';
 import React from 'react';
 import { Form } from './form.jsx';
@@ -99,7 +98,6 @@ function App() {
     await setInputCombobox(data.recipes);
     await setInputMultiselect(data.ingredients);
   }
-//<img src="./loupe.png"/>
 React.useEffect(() => {
   apiDataGet();
 }, [recipes])
