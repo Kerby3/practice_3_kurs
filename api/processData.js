@@ -1,9 +1,6 @@
 const axios = require('axios');
 const translate = require('node-google-translate-skidz');
-const url_lib = require("url");
 const crypto = require("crypto");
-const querystring = require('querystring');
-const https = require('https');
 
 translate.engine = "deepl";
 translate.key = process.env.DEEPL_KEY;
