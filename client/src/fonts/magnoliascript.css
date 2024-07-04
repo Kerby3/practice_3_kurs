@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Magnolia Script';
+    src: local('Magnolia Script'), local('Magnolia-Script'), url('Magnoliascript.woff2') format('woff2'), url('Magnoliascript.woff') format('woff'), url('Magnoliascript.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}

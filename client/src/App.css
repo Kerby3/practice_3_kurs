@@ -1,0 +1,200 @@
+@font-face {
+  font-family: "Birthstone Bounce Medium";
+  src: url('./fonts/BirthstoneBounce-Medium.ttf') format('truetype');
+}
+
+#root {
+    background: url(img/bg-root.jpg);
+    height: 100vh;
+    z-index: 0;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 1;
+    background: white;
+    position: relative;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    max-height: 50px;
+    align-items: center;
+    padding-top: 0px;
+    background-color: #6ee768;
+    border-radius: 20px;
+}
+
+.logo {
+    font-size: 48px;
+    color: white;
+    font-family: "Birthstone Bounce Medium";
+}
+
+.menu {
+    padding: 20px;
+    margin-top: 50px;
+    position: absolute;
+    width: 32.5vh;
+    right: 0;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    border: 1px solid lightgray;
+    border-right: none;
+    height: 100vh;
+    border-top-right-radius: 20px;
+    z-index: 2;
+    background-color: white;
+}
+
+.menu.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.loupe {
+    cursor: pointer;
+    
+    width: 32px;
+    height: 32px;
+}
+
+.forward {
+    background: url("img/loupe.png");
+}
+
+.back {
+    background: url("img/arrow.png");
+}
+
+/*.recipe-card {
+    margin-left: 10px;
+}
+
+.card-head {
+    display: flex;
+    justify-content: space-around;
+}
+
+.nutrition {
+    display: flex;
+    justify-content: space-around;
+}*/
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: inherit; /* Измените ширину по необходимости */
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 5px;
+}
+
+.radio-group label {
+  margin-left: 5px;
+}
+
+.form button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Адаптивные колонки */
+  gap: 20px;
+}
+
+.recipe-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  height: 200px; /* Высота изображения */
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+}
+
+.card-image img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.description {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+}
+
+.nutrition {
+  max-width: 40vh;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 0.8em;
+}
+
+h2, h3 {
+  margin-top: 0;
+}
+
+ul, ol {
+  list-style-position: inside;
+  padding-left: 20px;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .recipe-list {
+    grid-template-columns: 1fr; /* Одна колонка на мобильных */
+  }
+}
+
+
+@media (max-width: 1200px) {
+    .container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        width: 100%;
+    }
+}
