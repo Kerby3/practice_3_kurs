@@ -17,8 +17,6 @@ services:
     volumes:
       - ./client:/client
       - ./client:/node_modules
-    stdin_open: true
-    tty: true
   db:
     image: mysql
     restart: always
