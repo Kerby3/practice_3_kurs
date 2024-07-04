@@ -75,20 +75,6 @@
     background: url("img/arrow.png");
 }
 
-/*.recipe-card {
-    margin-left: 10px;
-}
-
-.card-head {
-    display: flex;
-    justify-content: space-around;
-}
-
-.nutrition {
-    display: flex;
-    justify-content: space-around;
-}*/
-
 .form {
   display: flex;
   flex-direction: column;
@@ -195,6 +181,6 @@ ul, ol {
 
 @media (max-width: 768px) {
     .menu {
-        width: 100%;
+        width: 95%;
     }
 }
