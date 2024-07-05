@@ -66,7 +66,6 @@ function App() {
   }
 
   const apiDataPost = async (body) => {
-    console.log("aaaa");
     const response = await fetch("http://localhost:443", {
       method: "POST",
       body: JSON.stringify(body),
